@@ -1,7 +1,32 @@
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
-var 
+var currentDay = $('#currentDay')
+currentDay.text(dayjs().format('MMMM DD, YY'))
+
+$('.saveBtn').on('click',function(){
+  var save = $(this).siblings('textarea').val()
+  var hours = $(this).parent().attr('id')
+  localStorage.setItem(hours, save)
+})
+$('.time-block').each(function(){
+  var timeBlock = $(this).attr('id').split('-')[1]
+  var currentTime = dayjs().format('HH') 
+  if (currentTime < timeBlock){
+    $(this).addClass('future')
+  }
+  else if (currentTime > timeBlock) {
+    $(this).addClass('past')
+  }
+  else {
+    $(this).addClass('current')
+  }
+})
+$('#hour-09').children('textarea').val(localStorage.getItem('hour-09'))
+$('#hour-10').children('textarea').val(localStorage.getItem('hour-10'))
+$('#hour-11').children('textarea').val(localStorage.getItem('hour-11'))
+$('#hour-12').children('textarea').val(localStorage.getItem('hour-12'))
+$('#hour-13').children('textarea').val(localStorage.getItem('hour-13'))
 
 
 
